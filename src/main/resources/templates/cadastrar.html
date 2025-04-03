@@ -1,17 +1,21 @@
 <!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
--->
-<html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
     <head>
         <title>Cadastro de filmes</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+            <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>Cadastro de filmes</h1>
         
-        
+        <form th:action="@{/cadastrar}" th:object="${filme}" method="POST">
+            <p>ID: <input type="text" th:field="*{id}"/></p>
+            <p>Título: <input type="text" th:field="*{titulo}" /></p>
+            <p>Sinopse: <input type="text" th:field="*{sinopse}" /></p>
+            <p>Gênero: <input type="text" th:field="*{genero}" /></p>
+            <p>Ano lançamento: <input type="text" th:field="*{lancamento}" /></p>
+            <p><input type="submit" value="Cadastrar" /></p>
+        </form>
     </body>
 </html>
