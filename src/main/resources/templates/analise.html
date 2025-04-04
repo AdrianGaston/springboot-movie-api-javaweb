@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Lista de Filmes</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+    </head>
+    <body>
+        <h1>Detalhes do Filme</h1>
+
+        <p><strong>Título:</strong> <span th:text="${filme.titulo}"></span></p>
+        <p><strong>Gênero:</strong> <span th:text="${filme.genero}"></span></p>
+        <p><strong>Sinopse:</strong> <span th:text="${filme.sinopse}"></span></p>
+        <p><strong>Lançamento:</strong> <span th:text="${filme.lancamento}"></span></p>
+
+        <h2>Adicionar Análise</h2>
+        <form th:action="@{/salvar-analise}" th:object="${analise}" method="post">
+            <!-- Campo oculto para garantir que ID do filme seja enviado no formulário e asociado na analise -->
+            <input type="hidden" th:name="filme.id" th:value="${filme.id}" />
+            
+            <p>Análise: <input type="text" th:field="*{analise}" /></p>
+            <p>Nota: <input type="text" th:field="*{nota}" /></p>
+        <input type="submit" value="Salvar Análise" />
+    </form> 
+        
+    </body>
+</html>

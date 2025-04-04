@@ -4,13 +4,13 @@
     <head>
         <title>Cadastro de filmes</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-            <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+     
     </head>
     <body>
         <h1>Cadastro de filmes</h1>
         
         <form th:action="@{/cadastrar}" th:object="${filme}" method="POST">
-            <p>ID: <input type="text" th:field="*{id}"/></p>
+            <!-- <p>ID: <input type="text" th:field="*{id}"/></p>  -->
             <p>Título: <input type="text" th:field="*{titulo}" /></p>
             <p>Sinopse: <input type="text" th:field="*{sinopse}" /></p>
             <p>Gênero: <input type="text" th:field="*{genero}" /></p>
