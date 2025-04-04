@@ -1,28 +1,26 @@
 package com.api.movies.model;
 
-import java.util.Date;
-
 
 public class Filme {
     private Long id;
     private String titulo;
     private String sinopse;
     private String genero;
-    private Date lancamento;
+    private int lancamento;
     
     //Construtores
     public Filme() {
     }
-
-    public Filme(Long id, String titulo, String sinopse, String genero, Date lancamento) {
+    
+    public Filme(Long id, String titulo, String sinopse, String genero, int lancamento) {
         this.id = id;
         this.titulo = titulo;
         this.sinopse = sinopse;
         this.genero = genero;
         this.lancamento = lancamento;
     }
-  
-    //Getters & Setters
+    
+    //Getters & Setter
     public Long getId() {
         return id;
     }
@@ -55,11 +53,11 @@ public class Filme {
         this.genero = genero;
     }
 
-    public Date getLancamento() {
+    public int getLancamento() {
         return lancamento;
     }
 
-    public void setLancamento(Date lancamento) {
+    public void setLancamento(int lancamento) {
         this.lancamento = lancamento;
     }
 }
