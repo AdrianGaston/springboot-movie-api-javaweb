@@ -4,11 +4,11 @@
     <head>
         <title>Lista de Filmes</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
-        
+
     </head>
     <body>
         <h1>Filmes Cadastrados</h1>
-        
+
         <table>
             <thead>
                 <tr>
@@ -23,10 +23,10 @@
                 <tr th:each="filme : ${filmes}">
                     <td th:text="${filme.id}" ></td>
                     <!-- <td th:text="${filme.titulo}" ></td> -->
-                    
+
                     <td>
-  <a th:href="@{/analise/{id}(id=${filme.id})}" th:text="${filme.titulo}"></a>
-</td>
+                        <a th:href="@{/analise/{id}(id=${filme.id})}" th:text="${filme.titulo}"></a>
+                    </td>
 
                     <td th:text="${filme.sinopse}" ></td>
                     <td th:text="${filme.genero}" ></td>
@@ -34,12 +34,11 @@
                 </tr>
             </tbody>
         </table>
-       <br/>
-      
-       <a href="/cadastrar">
-           <button type="button">Cadastrar Novo Filme</button>
-       </a>
-        
-       
+        <br/>
+
+        <a href="/cadastrar">
+            <button type="button">Cadastrar Novo Filme</button>
+        </a>
+
     </body>
 </html>
