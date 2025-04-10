@@ -75,5 +75,4 @@ public class MiscController {
         analises.add(analise);
         return "redirect:/filmes";
     }
-
 }
