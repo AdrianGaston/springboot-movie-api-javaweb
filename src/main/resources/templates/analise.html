@@ -16,7 +16,8 @@
         <h2>Adicionar Análise</h2>
         <form th:action="@{/salvar-analise}" th:object="${analise}" method="post">
             <!-- Campo oculto para garantir que ID do filme seja enviado no formulário e asociado na analise -->
-            <input type="hidden" th:name="filme.id" th:value="${filme.id}" />
+            <!-- <input type="hidden" th:name="filme.id" th:value="${filme.id}" /> -->
+            <input type="hidden" th:field="*{filme.id}" />
             
             <p>Análise: <input type="text" th:field="*{analise}" /></p>
             <p>Nota: <input type="text" th:field="*{nota}" /></p>

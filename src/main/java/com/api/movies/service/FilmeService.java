@@ -1,6 +1,6 @@
-package com.api.movies.controller.service;
+package com.api.movies.service;
 
-import com.api.movies.data.FilmeEntity;
+import com.api.movies.model.Filme;
 import com.api.movies.data.FilmeRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,14 +12,14 @@ public class FilmeService {
     @Autowired
     FilmeRepository filmeRepository;
     
-    public FilmeEntity criarFilme(FilmeEntity film) {
+    public Filme criarFilme(Filme film) {
         film.setId(null);
         filmeRepository.save(film);
         return film;
     }
     
-    public FilmeEntity atualizarFilme(Integer filmeId, FilmeEntity filmeRequest) {
-        FilmeEntity film = getFilmeId(filmeId);
+    public Filme atualizarFilme(Integer filmeId, Filme filmeRequest) {
+        Filme film = getFilmeId(filmeId);
         
         film.setTitulo(filmeRequest.getTitulo());
         film.setSinopse(filmeRequest.getSinopse());
@@ -30,16 +30,16 @@ public class FilmeService {
         return film;
     }
     
-    public FilmeEntity getFilmeId(Integer filmId) {
+    public Filme getFilmeId(Integer filmId) {
         return filmeRepository.findById(filmId).orElse(null);
     }
     
-    public List<FilmeEntity> listarFilmes() {
+    public List<Filme> listarFilmes() {
         return filmeRepository.findAll();
     }
     
     public void deletarFilme(Integer filmId) {
-        FilmeEntity film = getFilmeId(filmId);
+        Filme film = getFilmeId(filmId);
         filmeRepository.deleteById(film.getId());
     }
 }
