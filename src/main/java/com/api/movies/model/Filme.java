@@ -1,12 +1,15 @@
 package com.api.movies.model;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import lombok.Data;
 import jakarta.persistence.Table;
-
+import java.util.List;
 
 
 @Data
@@ -20,6 +23,9 @@ public class Filme {
     private String sinopse;
     private String genero;
     private int lancamento;
+    
+    @OneToMany(mappedBy = "filme", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Analise>analise;
     
     //Construtores
     public Filme() {

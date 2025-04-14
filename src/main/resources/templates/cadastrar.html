@@ -8,8 +8,9 @@
     </head>
     <body>
         <h1>Cadastro de filmes</h1>
+        <!--cadastrar -->
         
-        <form th:action="@{/cadastrar}" th:object="${filme}" method="POST">
+        <form th:action="@{/adicionar}" th:object="${filme}" method="POST">
             <!-- <p>ID: <input type="text" th:field="*{id}"/></p>  -->
             <p>Título: <input type="text" th:field="*{titulo}" /></p>
             <p>Sinopse: <input type="text" th:field="*{sinopse}" /></p>

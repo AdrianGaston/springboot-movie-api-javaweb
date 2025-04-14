@@ -22,7 +22,6 @@ public class FilmeController {
     @Autowired
     FilmeService filmeService;
     
-    
     @PostMapping("/adicionar")
     public ResponseEntity<Filme> addFilme(@RequestBody Filme film) {
         var novoFilme = filmeService.criarFilme(film);
