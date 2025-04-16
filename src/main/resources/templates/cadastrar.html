@@ -8,15 +8,17 @@
     </head>
     <body>
         <h1>Cadastro de filmes</h1>
-        <!--cadastrar -->
         
         <form th:action="@{/adicionar}" th:object="${filme}" method="POST">
-            <!-- <p>ID: <input type="text" th:field="*{id}"/></p>  -->
             <p>Título: <input type="text" th:field="*{titulo}" /></p>
             <p>Sinopse: <input type="text" th:field="*{sinopse}" /></p>
             <p>Gênero: <input type="text" th:field="*{genero}" /></p>
             <p>Ano lançamento: <input type="text" th:field="*{lancamento}" /></p>
             <p><input type="submit" value="Cadastrar" /></p>
         </form>
+        
+        <a href="/lista_filmes">
+            <button type="button">Lista de filmes</button>
+        </a>
     </body>
 </html>

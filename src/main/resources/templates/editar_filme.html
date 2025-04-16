@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Editar informações do filme</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    </head>
+    <body>
+        
+        <!-- <form th:action="@{/atualizar-filme}" th:object="${filme}" method="post"> -->
+        <form th:action="@{/atualizar-filme/{id}(id=${filme.id})}" th:object="${filme}" method="post">
+
+            <!--Campo oculto com ID-->
+            <input type="hidden" th:field="*{id}" />
+
+            <p>Título: <input type="text" th:field="*{titulo}" /></p>
+            <p>Gênero: <input type="text" th:field="*{genero}" /></p>
+            <p>Sinopse: <input type="text" th:field="*{sinopse}" /></p>
+            <p>Lançamento: <input type="text" th:field="*{lancamento}" /></p>
+
+            <p><input type="submit" value="Salvar alterações" /></p>
+        </form>
+        
+      
+        <a th:href="@{/excluir-filme/{id}(id=${filme.id})}">
+            <button type="button">Excluir filme</button>
+        </a>
+
+
+        <a th:href="@{/lista_filmes}">
+            <button type="button">← Voltar para a lista</button>
+        </a>
+        
+    </body>
+</html>

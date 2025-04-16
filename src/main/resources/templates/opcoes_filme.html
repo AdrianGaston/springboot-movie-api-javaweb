@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Detalhes do Filme</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    </head>
+    <body>
+        <div>
+            <strong>ID:</strong>
+            <span th:text="${filme.id}"></span>
+        </div>
+        <div>
+            <strong>Título:</strong>
+            <span th:text="${filme.titulo}"></span>
+        </div>
+    
+        <div>
+            <strong>Sinopse:</strong>
+            <p th:text="${filme.sinopse}"></p>
+        </div>
+    
+        <div>
+            <strong>Gênero:</strong>
+            <span th:text="${filme.genero}"></span>
+        </div>
+    
+        <div>
+            <strong>Ano de Lançamento:</strong>
+            <span th:text="${filme.lancamento}"></span>
+        </div>
+        
+        <a href="/lista_filmes">
+            <button type="button">← Voltar para a lista</button>
+        </a>
+        
+        <a th:href="@{/editar_filme/{id}(id=${filme.id})}">
+            <button type="button">Editar informações do filme</button>
+        </a>
+        
+        <a th:href="@{/analise/{id}(id=${filme.id})}">
+            <button type="button">Adicionar análise</button>
+        </a>
+        
+        <form th:action="@{/excluir-filme/{id}(id=${filme.id})}" method="post">
+            <button type="submit">Excluir Filme</button>
+        </form>
+
+    </body>
+</html>

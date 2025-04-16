@@ -43,17 +43,25 @@ public class FilmeController {
         return new ResponseEntity<>(filme, HttpStatus.OK);
     }
     
-    @PutMapping("/atualizar/{id}")
+    /*@PutMapping("/atualizar/{id}")
     public ResponseEntity<Filme> atualizarFilme(@PathVariable Integer id, @RequestBody Filme filme) {
         var filmeAtualizado = filmeService.atualizarFilme(id, filme);
         
         return new ResponseEntity<>(filmeAtualizado, HttpStatus.OK);
+    }*/
+    
+    @PutMapping("/atualizar/{id}")
+    public String atualizarFilme(@PathVariable Integer id, @RequestBody Filme filme) {
+        filmeService.atualizarFilme(id, filme);
+    
+        return "redirect:/lista_filmes";
     }
     
     @DeleteMapping("/deletar/{id}")
-    public ResponseEntity deletarFilme(@PathVariable Integer id) {
+    public String deletarFilme(@PathVariable Integer id) {
         filmeService.deletarFilme(id);
         
-        return new ResponseEntity<>(HttpStatus.OK);
+        //return new ResponseEntity<>(HttpStatus.OK);
+        return "redirect:/filmes";
     }
 }
