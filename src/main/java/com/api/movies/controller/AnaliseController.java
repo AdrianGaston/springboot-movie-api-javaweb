@@ -1,5 +1,6 @@
 package com.api.movies.controller;
 
+import com.api.movies.data.FilmeRepository;
 import com.api.movies.model.Analise;
 import com.api.movies.service.AnaliseService;
 import java.util.List;
@@ -22,6 +23,9 @@ public class AnaliseController {
     
     @Autowired
     private AnaliseService analiseService;
+    
+    @Autowired
+    private FilmeRepository filmeRepository;
     
     @PostMapping("/adicionar")  
     public ResponseEntity<Analise> addAnalise(@RequestBody Analise analise) {

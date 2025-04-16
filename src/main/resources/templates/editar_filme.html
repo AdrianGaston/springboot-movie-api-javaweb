@@ -7,7 +7,6 @@
     </head>
     <body>
         
-        <!-- <form th:action="@{/atualizar-filme}" th:object="${filme}" method="post"> -->
         <form th:action="@{/atualizar-filme/{id}(id=${filme.id})}" th:object="${filme}" method="post">
 
             <!--Campo oculto com ID-->
@@ -20,12 +19,10 @@
 
             <p><input type="submit" value="Salvar alterações" /></p>
         </form>
-        
       
         <a th:href="@{/excluir-filme/{id}(id=${filme.id})}">
             <button type="button">Excluir filme</button>
         </a>
-
 
         <a th:href="@{/lista_filmes}">
             <button type="button">← Voltar para a lista</button>

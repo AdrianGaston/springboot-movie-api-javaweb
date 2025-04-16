@@ -22,10 +22,8 @@
             <tbody>
                 <tr th:each="filme : ${filmes}">
                     <td th:text="${filme.id}" ></td>
-                    <!-- <td th:text="${filme.titulo}" ></td> -->
 
                     <td>
-                        <!-- <a th:href="@{/analise/{id}(id=${filme.id})}" th:text="${filme.titulo}"></a> -->
                         <a th:href="@{/filme/{id}(id=${filme.id})}" th:text="${filme.titulo}"></a>
                     </td>
 
