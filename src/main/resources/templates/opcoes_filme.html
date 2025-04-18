@@ -6,6 +6,10 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     </head>
     <body>
+        
+        <h2>Detalhes do Filme</h2>
+        <br/>
+        
         <div>
             <strong>ID:</strong>
             <span th:text="${filme.id}"></span>
@@ -14,34 +18,63 @@
             <strong>Título:</strong>
             <span th:text="${filme.titulo}"></span>
         </div>
-    
+
         <div>
             <strong>Sinopse:</strong>
             <p th:text="${filme.sinopse}"></p>
         </div>
-    
+
         <div>
             <strong>Gênero:</strong>
             <span th:text="${filme.genero}"></span>
         </div>
-    
+
         <div>
             <strong>Ano de Lançamento:</strong>
             <span th:text="${filme.lancamento}"></span>
         </div>
+
+        <!-- Análise -->
+        <div th:if="${filme.analise != null}">
+            <h3>Análise do Filme</h3>
+            <div>
+                <strong>Análise:</strong>
+                <p th:text="${filme.analise.analise}"></p>
+            </div>
+            <div>
+                <strong>Nota:</strong>
+                <span th:text="${filme.analise.nota}"></span>
+            </div>
+            <br/><br/>
+            
+            <!-- Botão para editar análise -->
+            <a th:href="@{/editar_analise/{id}(id=${filme.analise.id})}">
+                <button type="button">Editar Análise</button>
+            </a>
+        </div>
+
+        <!-- Caso não tenha análise -->
+        <div th:if="${filme.analise == null}">
+            <p><strong>Sem análise.</strong></p>
+            
+            <!-- Botão para adicionar análise -->
+            <a th:href="@{/analise/{id}(id=${filme.id})}">
+                <button type="button">Adicionar Análise</button>
+            </a>
+        </div>
+        <br/>
         
+        <!-- Botão para voltar para a lista -->
         <a href="/lista_filmes">
             <button type="button">← Voltar para a lista</button>
         </a>
-        
+
+        <!-- Botão para editar informações do filme -->
         <a th:href="@{/editar_filme/{id}(id=${filme.id})}">
             <button type="button">Editar informações do filme</button>
         </a>
-        
-        <a th:href="@{/analise/{id}(id=${filme.id})}">
-            <button type="button">Adicionar análise</button>
-        </a>
-        
+
+        <!-- Formulário para excluir filme -->
         <br/><br/>
         <form th:action="@{/excluir-filme/{id}(id=${filme.id})}" method="post">
             <button type="submit">Excluir Filme</button>

@@ -6,10 +6,9 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import lombok.Data;
 import jakarta.persistence.Table;
-import java.util.List;
 
 
 @Data
@@ -24,8 +23,9 @@ public class Filme {
     private String genero;
     private int lancamento;
     
-    @OneToMany(mappedBy = "filme", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Analise>analise;
+    @OneToOne(mappedBy = "filme", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+   
+    private Analise analise;
     
     //Construtores
     public Filme() {

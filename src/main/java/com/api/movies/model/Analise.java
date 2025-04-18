@@ -5,7 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -18,7 +18,7 @@ public class Analise {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "filme_id")
     private Filme filme;
     private String analise;

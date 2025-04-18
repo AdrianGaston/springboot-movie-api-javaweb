@@ -4,6 +4,7 @@ import com.api.movies.data.AnaliseRepository;
 import com.api.movies.data.FilmeRepository;
 import com.api.movies.model.Analise;
 import com.api.movies.model.Filme;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,27 +17,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class AnaliseViewController {
 
     @Autowired
-    private AnaliseRepository analiseRepository;
+    private FilmeRepository filmeRepository;
 
     @Autowired
-    private FilmeRepository filmeRepository;
+    private AnaliseController analiseController;
+
+    @Autowired
+    private AnaliseRepository analiseRepository;
 
     @PostMapping("/salvar-analise")
     public String SalvarAnalise(@RequestParam("filmeId") Integer filmeId,
             @RequestParam("analise") String texto,
             @RequestParam("nota") int nota) {
-        Filme filme = filmeRepository.findById(filmeId).orElse(null);
 
-        if (filme == null) {
-            return "redirect:/lista_filmes";
-        }
-
-        Analise novaAnalise = new Analise();
-        novaAnalise.setFilme(filme);
-        novaAnalise.setAnalise(texto);
-        novaAnalise.setNota(nota);
-
-        analiseRepository.save(novaAnalise);
+        analiseController.salvarAnalise(filmeId, texto, nota);
 
         return "redirect:/lista_filmes";
     }
@@ -65,4 +59,71 @@ public class AnaliseViewController {
         model.addAttribute("filme", filme);
         return "opcoes_filme";
     }
+
+    @GetMapping("/analises")
+    public String listarAnalises(Model model) {
+        List<Analise> analises = analiseRepository.findAll();
+        model.addAttribute("analises", analises);
+
+        return "listar_analises";
+    }
+
+    @GetMapping("/editar_analise/{id}")
+    public String exibirFormularioEdicao(@PathVariable Integer id, Model model) {
+        Analise analise = analiseRepository.findById(id).orElse(null);
+
+        if (analise == null) {
+            return "redirect:/analise";
+        }
+
+        model.addAttribute("analise", analise);
+
+        return "editar_analise";
+    }
+
+    @PostMapping("editar_analise/{id}")
+    public String salvarEdicaoAnalise(@PathVariable Integer id, @RequestParam("analise") String texto, @RequestParam("nota") int nota) {
+        Analise analise = analiseRepository.findById(id).orElse(null);
+
+        if (analise != null) {
+            analise.setAnalise(texto);
+            analise.setNota(nota);
+            analiseRepository.save(analise);
+
+            return "redirect:/detalhes_filme" + analise.getFilme().getId();
+        }
+
+        return "redirect:/analise";
+    }
+
+    @PostMapping("/atualizar_analise")
+    public String atualizarAnalise(
+            @RequestParam("id") Integer id,
+            @RequestParam("filme.id") Integer filmeId,
+            @RequestParam("analise") String texto,
+            @RequestParam("nota") int nota) {
+
+        Analise analise = analiseRepository.findById(id).orElse(null);
+        Filme filme = filmeRepository.findById(filmeId).orElse(null);
+
+        if (analise != null && filme != null) {
+            analise.setAnalise(texto);
+            analise.setNota(nota);
+            analise.setFilme(filme);
+            analiseRepository.save(analise);
+        }
+
+        return "redirect:/lista_filmes";
+    }
+
+    @PostMapping("/excluir_analise/{id}")
+    public String excluirAnalise(@PathVariable Integer id) {
+        Analise analise = analiseRepository.findById(id).orElse(null);
+        
+        analiseRepository.deleteById(id);
+        System.out.println("analise exlcuida com sucesso!" + analise.getId());
+                
+        Integer filmeId = analise.getFilme().getId();
+        return "redirect:/filme/" + filmeId;
+    }   
 }

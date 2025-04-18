@@ -17,6 +17,8 @@
                     <th>Sinopse</th>
                     <th>Gênero</th>
                     <th>Ano Lançamento</th>
+                    <th>Análise</th>
+                    <th>Nota</th>
                 </tr>
             </thead>
             <tbody>
@@ -30,6 +32,11 @@
                     <td th:text="${filme.sinopse}" ></td>
                     <td th:text="${filme.genero}" ></td>
                     <td th:text="${filme.lancamento}" ></td>
+                    
+                    
+                    <td th:text="${filme.analise?.analise}">Sem análise</td>
+                    <td th:text="${filme.analise?.nota}">-</td>
+
                 </tr>
             </tbody>
         </table>

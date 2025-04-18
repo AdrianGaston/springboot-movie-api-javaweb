@@ -7,6 +7,9 @@
     </head>
     <body>
         
+        <h2>Edição do Filme</h2>
+        <br/>
+      
         <form th:action="@{/atualizar-filme/{id}(id=${filme.id})}" th:object="${filme}" method="post">
 
             <!--Campo oculto com ID-->

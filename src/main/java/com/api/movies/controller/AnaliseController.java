@@ -1,5 +1,6 @@
 package com.api.movies.controller;
 
+import com.api.movies.data.AnaliseRepository;
 import com.api.movies.data.FilmeRepository;
 import com.api.movies.model.Analise;
 import com.api.movies.service.AnaliseService;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -25,6 +27,9 @@ public class AnaliseController {
     private AnaliseService analiseService;
     
     @Autowired
+    private AnaliseRepository analiseRepository;
+    
+    @Autowired
     private FilmeRepository filmeRepository;
     
     @PostMapping("/adicionar")  
@@ -33,6 +38,18 @@ public class AnaliseController {
         
         return new ResponseEntity<>(novaAnalise, HttpStatus.OK);
     }
+    
+    
+    @PostMapping("salvar-analise")
+    public void salvarAnalise(@RequestParam("filmeId") Integer filmeId,@RequestParam("analise") String texto,@RequestParam("nota") int nota) {
+        Analise novaAnalise = new Analise();
+        novaAnalise.setFilme(filmeRepository.findById(filmeId).orElse(null));
+        novaAnalise.setAnalise(texto);
+        novaAnalise.setNota(nota);
+        
+        analiseRepository.save(novaAnalise);
+    }
+    
     
     @GetMapping("/listar")
     public ResponseEntity<List<Analise>> listarAnalises() {
