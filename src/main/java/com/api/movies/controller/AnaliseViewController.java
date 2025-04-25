@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,7 +37,7 @@ public class AnaliseViewController {
     }
 
     @GetMapping("/analise/{id}")
-    public String exibirDetalheFilme(@PathVariable Integer id, Model model) {
+    public String exibirDetalheFilme(@PathVariable Integer id, @CookieValue(name = "theme", defaultValue = "claro") String tema, Model model) {
         Filme filme = filmeRepository.findById(id).orElse(null);
 
         if (filme == null) {
@@ -48,28 +49,32 @@ public class AnaliseViewController {
 
         model.addAttribute("filme", filme);
         model.addAttribute("analise", novaAnalise);
+        model.addAttribute("tema", tema);
 
         return "analise";
     }
 
     @GetMapping("/filme/{id}")
-    public String exibirOpcoesFilme(@PathVariable Integer id, Model model) {
+    public String exibirOpcoesFilme(@PathVariable Integer id, @CookieValue(name = "theme", defaultValue = "claro") String tema, Model model) {
         Filme filme = filmeRepository.findById(id).orElse(null);
 
         model.addAttribute("filme", filme);
+        model.addAttribute("tema", tema);
+
         return "opcoes_filme";
     }
 
     @GetMapping("/analises")
-    public String listarAnalises(Model model) {
+    public String listarAnalises(@CookieValue(name = "theme", defaultValue = "claro") String tema, Model model) {
         List<Analise> analises = analiseRepository.findAll();
         model.addAttribute("analises", analises);
+        model.addAttribute("tema", tema);
 
         return "listar_analises";
     }
 
     @GetMapping("/editar_analise/{id}")
-    public String exibirFormularioEdicao(@PathVariable Integer id, Model model) {
+    public String exibirFormularioEdicao(@PathVariable Integer id, @CookieValue(name = "theme", defaultValue = "claro") String tema, Model model) {
         Analise analise = analiseRepository.findById(id).orElse(null);
 
         if (analise == null) {
@@ -77,6 +82,7 @@ public class AnaliseViewController {
         }
 
         model.addAttribute("analise", analise);
+        model.addAttribute("tema", tema);
 
         return "editar_analise";
     }
@@ -119,11 +125,11 @@ public class AnaliseViewController {
     @PostMapping("/excluir_analise/{id}")
     public String excluirAnalise(@PathVariable Integer id) {
         Analise analise = analiseRepository.findById(id).orElse(null);
-        
+
         analiseRepository.deleteById(id);
-        System.out.println("analise exlcuida com sucesso!" + analise.getId());
-                
+
         Integer filmeId = analise.getFilme().getId();
         return "redirect:/filme/" + filmeId;
-    }   
+    }
+
 }

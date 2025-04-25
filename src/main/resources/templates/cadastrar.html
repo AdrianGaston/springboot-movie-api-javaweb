@@ -4,11 +4,15 @@
     <head>
         <title>Cadastro de filmes</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-     
+
+        <link th:href="@{/claro.css}" th:if="${tema == 'claro'}" rel="stylesheet" />
+        <link th:href="@{/escuro.css}" th:if="${tema == 'escuro'}" rel="stylesheet" />
     </head>
-    <body>
+
+    <body th:class="${tema == 'claro' ? 'tema-claro' : 'tema-escuro'}">
+
         <h1>Cadastro de filmes</h1>
-        
+
         <form th:action="@{/adicionar}" th:object="${filme}" method="POST">
             <p>Título: <input type="text" th:field="*{titulo}" /></p>
             <p>Sinopse: <input type="text" th:field="*{sinopse}" /></p>
@@ -16,9 +20,25 @@
             <p>Ano lançamento: <input type="text" th:field="*{lancamento}" /></p>
             <p><input type="submit" value="Cadastrar" /></p>
         </form>
-        
+
         <a href="/lista_filmes">
             <button type="button">Lista de filmes</button>
-        </a>
+        </a><br/>
+
+        <br/>
+        <p>Você pode configurar suas preferências de tema logo abaixo..</p>
+
+
+        <!-- Formulário para mudar o tema -->
+        <form th:action="@{/cookies/gravaTema}" method="POST">
+            <input type="hidden" name="tema" value="claro" />
+            <button type="submit">Tema Claro</button>
+        </form>
+        <br/>
+        <form th:action="@{/cookies/gravaTema}" method="POST">
+            <input type="hidden" name="tema" value="escuro" />
+            <button type="submit">Tema Escuro</button>
+        </form>
+
     </body>
 </html>

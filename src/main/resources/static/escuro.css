@@ -1,0 +1,12 @@
+@charset "UTF-8";
+
+body.tema-escuro {
+    background-color: #f0f0f0;
+    font-family: Verdana;
+    color: white;
+}
+
+a, a:visited {
+    color: white;
+}
+

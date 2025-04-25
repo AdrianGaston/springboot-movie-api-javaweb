@@ -4,8 +4,12 @@
     <head>
         <title>Lista de Filmes</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+        
+        <link th:href="@{/claro.css}" th:if="${tema == 'claro'}" rel="stylesheet" />
+        <link th:href="@{/escuro.css}" th:if="${tema == 'escuro'}" rel="stylesheet" />
+        
     </head>
-    <body>
+    <body th:class="${tema == 'claro' ? 'tema-claro' : 'tema-escuro'}">
         <h1>Detalhes do Filme</h1>
 
         <p><strong>Título:</strong> <span th:text="${filme.titulo}"></span></p>

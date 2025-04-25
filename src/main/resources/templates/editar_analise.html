@@ -3,8 +3,12 @@
     <head>
         <title>Editar informações de análise</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        
+        <link th:href="@{/claro.css}" th:if="${tema == 'claro'}" rel="stylesheet" />
+        <link th:href="@{/escuro.css}" th:if="${tema == 'escuro'}" rel="stylesheet" />
+        
     </head>
-    <body>
+    <body th:class="${tema == 'claro' ? 'tema-claro' : 'tema-escuro'}">
 
         <h2>Edição da Análise</h2>
         <br/>

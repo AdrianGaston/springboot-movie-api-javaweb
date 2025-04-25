@@ -4,12 +4,16 @@
     <head>
         <title>Detalhes do Filme</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+        <link th:href="@{/claro.css}" th:if="${tema == 'claro'}" rel="stylesheet" />
+        <link th:href="@{/escuro.css}" th:if="${tema == 'escuro'}" rel="stylesheet" />
+
     </head>
-    <body>
-        
+    <body th:class="${tema == 'claro' ? 'tema-claro' : 'tema-escuro'}">
+
         <h2>Detalhes do Filme</h2>
         <br/>
-        
+
         <div>
             <strong>ID:</strong>
             <span th:text="${filme.id}"></span>
@@ -46,7 +50,7 @@
                 <span th:text="${filme.analise.nota}"></span>
             </div>
             <br/><br/>
-            
+
             <!-- Botão para editar análise -->
             <a th:href="@{/editar_analise/{id}(id=${filme.analise.id})}">
                 <button type="button">Editar Análise</button>
@@ -56,14 +60,14 @@
         <!-- Caso não tenha análise -->
         <div th:if="${filme.analise == null}">
             <p><strong>Sem análise.</strong></p>
-            
+
             <!-- Botão para adicionar análise -->
             <a th:href="@{/analise/{id}(id=${filme.id})}">
                 <button type="button">Adicionar Análise</button>
             </a>
         </div>
         <br/>
-        
+
         <!-- Botão para voltar para a lista -->
         <a href="/lista_filmes">
             <button type="button">← Voltar para a lista</button>
