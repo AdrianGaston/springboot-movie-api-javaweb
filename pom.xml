@@ -6,13 +6,16 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.4.4</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath/> 
     </parent>
     <groupId>com.api</groupId>
     <artifactId>movies</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>movies</name>
     <description>API para gerenciamento de filmes</description>
+    
+    <packaging>war</packaging>
+    
     <url/>
     <licenses>
         <license/>
@@ -80,6 +83,8 @@
                 </configuration>
             </plugin>
         </plugins>
+        
+        <finalName>${artifactId}</finalName>
     </build>
 
 </project>
